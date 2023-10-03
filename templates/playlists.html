@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Playlists</title>
+</head>
+<body>
+    <h1>Your Spotify Playlists</h1>
+    <div class="playlist-container">
+        {% for playlist in playlist['items'] %} 
+            <div class="playlist">
+                <img src="{{ playlist['images'][0]['url'] }}" alt="Playlist Cover">
+                <h2>{{ playlist['name'] }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

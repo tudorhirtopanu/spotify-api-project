@@ -2,7 +2,7 @@ import requests
 import urllib.parse
 
 from datetime import datetime, timedelta
-from flask import Flask, redirect, request, jsonify, session
+from flask import Flask, redirect, request, jsonify, session, render_template
 from decouple import config
 
 app = Flask(__name__)
@@ -75,7 +75,8 @@ def get_playlists():
     response = requests.get(API_BASE_URL + 'me/playlists', headers=headers)
     playlists = response.json()
 
-    return jsonify(playlists)
+    #return jsonify(playlists)
+    return render_template('playlists.html', playlist=playlists)
 
 
 @app.route('/refresh-token')
