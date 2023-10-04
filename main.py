@@ -24,7 +24,7 @@ def index():
 
 @app.route('/login')
 def login():
-    scope = 'user-read-private user-read-email user-read-recently-played'
+    scope = 'user-read-private user-read-email user-read-recently-played user-top-read'
 
     params = {
         'client_id':CLIENT_ID,
@@ -78,15 +78,17 @@ def get_playlists():
     response_playlists = requests.get(API_BASE_URL + 'me/playlists', headers=headers)
     playlists = response_playlists.json()
 
-    
-
      # Fetch recently played tracks
     response_recently_played = requests.get(API_BASE_URL + 'me/player/recently-played', headers=headers)
     recently_played = response_recently_played.json()
 
-    #return jsonify(recently_played)
+    # Fetch top artists
+    response_top_artists = requests.get(API_BASE_URL + 'me/top/artists', headers=headers)
+    top_artists = response_top_artists.json()
 
-    return render_template('playlists.html', playlist=playlists, recently_playedd=recently_played)
+    #return jsonify(top_artists)
+
+    return render_template('playlists.html', playlist=playlists, recently_played_data=recently_played)
 
 
 @app.route('/refresh-token')

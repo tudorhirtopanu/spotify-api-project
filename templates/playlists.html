@@ -19,7 +19,7 @@
     <div class="recently-played-container">
         <div class="recently-played-songs">
             <ul>
-                {% for track in recently_playedd['items'] %}
+                {% for track in recently_played_data['items'] %}
                 <li>
                     <img src="{{ track['track']['album']['images'][0]['url'] }}" alt="Album Cover">
                     {{ track['track']['name'] }} by {{ track['track']['artists'][0]['name'] }}
