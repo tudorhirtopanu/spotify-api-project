@@ -16,13 +16,15 @@ AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 API_BASE_URL = 'https://api.spotify.com/v1/'
 
+RECENTLY_PLAYED_URL = 'https://api.spotify.com/v1/me/player/recently-played'
+
 @app.route('/')
 def index():
     return "Welcome to my Spotify App <a href='/login'>Login with Spotify</a>"
 
 @app.route('/login')
 def login():
-    scope = 'user-read-private user-read-email'
+    scope = 'user-read-private user-read-email user-read-recently-played'
 
     params = {
         'client_id':CLIENT_ID,
@@ -72,11 +74,19 @@ def get_playlists():
         'Authorization': f"Bearer {session['access_token']}"
     }
 
-    response = requests.get(API_BASE_URL + 'me/playlists', headers=headers)
-    playlists = response.json()
+    # Fetch user playlists
+    response_playlists = requests.get(API_BASE_URL + 'me/playlists', headers=headers)
+    playlists = response_playlists.json()
 
-    #return jsonify(playlists)
-    return render_template('playlists.html', playlist=playlists)
+    
+
+     # Fetch recently played tracks
+    response_recently_played = requests.get(API_BASE_URL + 'me/player/recently-played', headers=headers)
+    recently_played = response_recently_played.json()
+
+    #return jsonify(recently_played)
+
+    return render_template('playlists.html', playlist=playlists, recently_playedd=recently_played)
 
 
 @app.route('/refresh-token')
@@ -102,3 +112,5 @@ def refresh_token():
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
+
+

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Playlists</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Your Spotify Playlists</h1>
@@ -14,6 +15,18 @@
                 <h2>{{ playlist['name'] }}</h2>
             </div>
         {% endfor %}
+    </div>
+    <div class="recently-played-container">
+        <div class="recently-played-songs">
+            <ul>
+                {% for track in recently_playedd['items'] %}
+                <li>
+                    <img src="{{ track['track']['album']['images'][0]['url'] }}" alt="Album Cover">
+                    {{ track['track']['name'] }} by {{ track['track']['artists'][0]['name'] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 </html>
