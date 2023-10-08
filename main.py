@@ -60,8 +60,28 @@ def callback():
         session['refresh_token'] = token_info['refresh_token']
         session['expires_at'] = datetime.now().timestamp() + token_info['expires_in']
 
-        return redirect('/playlists')
+        return redirect('/homepage')
+
+@app.route('/homepage')
+def display_homepage():
+    if 'access_token' not in session:
+        return redirect('/login')
     
+    if datetime.now().timestamp() > session['expires_at']:
+        return redirect('/refresh-token')
+    
+    headers = {
+        'Authorization': f"Bearer {session['access_token']}"
+    }
+
+    # Fetch user profile information
+    response_user_profile = requests.get(API_BASE_URL + 'me', headers=headers)
+    user_profile = response_user_profile.json()
+    user_name_data = user_profile.get('display_name', 'User')
+
+    return render_template('index.html', user_name=user_name_data)
+
+
 @app.route('/playlists')
 def get_playlists():
     if 'access_token' not in session:
@@ -86,9 +106,14 @@ def get_playlists():
     response_top_artists = requests.get(API_BASE_URL + 'me/top/artists', headers=headers)
     top_artists = response_top_artists.json()
 
+    # Fetch user profile information
+    response_user_profile = requests.get(API_BASE_URL + 'me', headers=headers)
+    user_profile = response_user_profile.json()
+    user_name_data = user_profile.get('display_name', 'User')
+
     #return jsonify(top_artists)
 
-    return render_template('playlists.html', playlist=playlists, recently_played_data=recently_played)
+    return render_template('playlists.html', playlist=playlists, recently_played_data=recently_played, user_name=user_name_data)
 
 
 @app.route('/refresh-token')
@@ -110,7 +135,7 @@ def refresh_token():
         session['access_token'] = new_token_info['access_token']
         session['expires_at'] = datetime.now().timestamp() + new_token_info['expires_in']
 
-        return redirect('/playlists')
+        return redirect('/homepage')
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
