@@ -79,7 +79,11 @@ def display_homepage():
     user_profile = response_user_profile.json()
     user_name_data = user_profile.get('display_name', 'User')
 
-    return render_template('index.html', user_name=user_name_data)
+    # Fetch top artists
+    response_top_artists = requests.get(API_BASE_URL + 'me/top/artists?time_range=short_term&limit=5', headers=headers)
+    top_artists_data = response_top_artists.json()
+
+    return render_template('index.html', user_name=user_name_data, top_artists = top_artists_data)
 
 
 @app.route('/playlists')
