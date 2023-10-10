@@ -4,3 +4,19 @@ body{
     font-family: "Circular", "Avenir", "Proxima Nova", "Helvetica Neue", Helvetica, sans-serif;
 
 }
+
+.top-artist-container {
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next row when necessary */
+    justify-content: flex-start; /* Align items to the start of the container */
+}
+
+.top-artist {
+    margin: 10px; /* Add some spacing between items */
+    text-align: center; /* Center text within each item */
+    transition: transform 0.2s;
+}
+
+.top-artist:hover {
+    transform: scale(1.1); /* Enlarge the item by 10% on hover */
+}
