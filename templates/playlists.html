@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Your Spotify Playlists</h1>
+    <h1>Welcome {{ user_name }}</h1>
     <div class="playlist-container">
         {% for playlist in playlist['items'] %} 
             <div class="playlist">
