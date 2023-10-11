@@ -7,16 +7,47 @@ body{
 
 .top-artist-container {
     display: flex; /* Use flexbox */
-    flex-wrap: wrap; /* Allow items to wrap to the next row when necessary */
+    /* flex-wrap: wrap; Allow items to wrap to the next row when necessary */
     justify-content: flex-start; /* Align items to the start of the container */
+    overflow: hidden; /* Hide content that overflows */
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+.top-artist-wrapper {
+    display: inline-block; /* Display artists horizontally */
+    white-space: nowrap; /* Prevent line breaks within artists */
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
 }
 
 .top-artist {
     margin: 10px; /* Add some spacing between items */
     text-align: center; /* Center text within each item */
     transition: transform 0.2s;
+    display: inline-block;
 }
 
 .top-artist:hover {
     transform: scale(1.1); /* Enlarge the item by 10% on hover */
+}
+
+#scroll-right-button {
+    position: absolute;
+    right: 0;
+    top: 50%; /* Adjust this value to vertically center the button */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+#scroll-right-button:hover {
+    color: #0077FF; /* Change the color when hovered */
+}
+
+.top-artist img {
+    /* Your CSS styles for images within .top-artist divs */
+    border-radius: 10px;
 }
