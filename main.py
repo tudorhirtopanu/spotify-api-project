@@ -74,14 +74,17 @@ def display_homepage():
         'Authorization': f"Bearer {session['access_token']}"
     }
 
+    # Get the selected time range from the query parameters
+    time_range = request.args.get('time_range', 'short_term')
+
     # Fetch user profile information
     response_user_profile = requests.get(API_BASE_URL + 'me', headers=headers)
     user_profile = response_user_profile.json()
     user_name_data = user_profile.get('display_name', 'User')
 
     # Fetch top artists
-    response_top_artists = requests.get(API_BASE_URL + 'me/top/artists?time_range=short_term&limit=5', headers=headers)
-    top_artists_data = response_top_artists.json()
+    response_top_artists = requests.get(API_BASE_URL + f'me/top/artists?time_range={time_range}&limit=10', headers=headers)
+    top_artists_data = response_top_artists.json()    
 
     return render_template('index.html', user_name=user_name_data, top_artists = top_artists_data)
 
