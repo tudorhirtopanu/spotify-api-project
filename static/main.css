@@ -6,11 +6,10 @@ body{
 }
 
 .top-artist-container {
-    display: flex; /* Use flexbox */
-    /* flex-wrap: wrap; Allow items to wrap to the next row when necessary */
-    justify-content: flex-start; /* Align items to the start of the container */
-    overflow: hidden; /* Hide content that overflows */
-    white-space: nowrap; /* Prevent line breaks */
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden; 
+    white-space: nowrap; 
 }
 
 .top-artist-wrapper {
@@ -21,8 +20,8 @@ body{
 }
 
 .top-artist {
-    margin: 10px; /* Add some spacing between items */
-    text-align: center; /* Center text within each item */
+    margin: 10px; 
+    text-align: center; 
     transition: transform 0.2s;
     display: inline-block;
 }
@@ -48,6 +47,5 @@ body{
 }
 
 .top-artist img {
-    /* Your CSS styles for images within .top-artist divs */
     border-radius: 10px;
 }
