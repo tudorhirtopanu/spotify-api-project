@@ -49,3 +49,29 @@ body{
 .top-artist img {
     border-radius: 10px;
 }
+
+/* CSS for Recently Played Container */
+.recently-played-container {
+    display: flex; 
+    align-items: center; 
+}
+
+/* CSS for Recently Played Songs List */
+.recently-played-songs {
+    display: flex; 
+    align-items: center; 
+    margin-left: 10px; 
+}
+
+/* CSS for Album Cover Images */
+.recently-played-songs img {
+    max-width: 50px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+/* CSS for Song List Items */
+.recently-played-songs li {
+    list-style: none; 
+    margin-top: 10px; 
+}
