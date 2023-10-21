@@ -84,9 +84,13 @@ def display_homepage():
 
     # Fetch top artists
     response_top_artists = requests.get(API_BASE_URL + f'me/top/artists?time_range={time_range}&limit=10', headers=headers)
-    top_artists_data = response_top_artists.json()    
+    top_artists_data = response_top_artists.json()   
 
-    return render_template('index.html', user_name=user_name_data, top_artists = top_artists_data)
+    # Fetch recently played tracks
+    response_recently_played = requests.get(API_BASE_URL + 'me/player/recently-played?limit=5', headers=headers)
+    recently_played = response_recently_played.json() 
+
+    return render_template('index.html', user_name=user_name_data, top_artists = top_artists_data, recently_played_data=recently_played)
 
 
 @app.route('/playlists')
@@ -105,7 +109,7 @@ def get_playlists():
     response_playlists = requests.get(API_BASE_URL + 'me/playlists', headers=headers)
     playlists = response_playlists.json()
 
-     # Fetch recently played tracks
+    # Fetch recently played tracks
     response_recently_played = requests.get(API_BASE_URL + 'me/player/recently-played', headers=headers)
     recently_played = response_recently_played.json()
 
