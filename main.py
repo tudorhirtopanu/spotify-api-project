@@ -20,7 +20,7 @@ RECENTLY_PLAYED_URL = 'https://api.spotify.com/v1/me/player/recently-played'
 
 @app.route('/')
 def index():
-    return "Welcome to my Spotify App <a href='/login'>Login with Spotify</a>"
+    return redirect('/login')
 
 @app.route('/login')
 def login():
@@ -37,7 +37,7 @@ def login():
 
     auth_url = f"{AUTH_URL}?{urllib.parse.urlencode(params)}"
 
-    return redirect(auth_url)
+    return render_template('login.html', auth_url=auth_url)
 
 @app.route('/callback')
 def callback():
